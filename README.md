@@ -1,5 +1,7 @@
 # Doctrine DBAL service provider for unit tests
 
+[![Build Status](https://travis-ci.org/matthiasnoback/doctrine-dbal-test-service-provider.png?branch=1.0)](https://travis-ci.org/matthiasnoback/doctrine-dbal-test-service-provider)
+
 This library contains a service provider to be used with a [service container for PHPUnit
 tests](https://github.com/matthiasnoback/phpunit-test-service-container).
 
