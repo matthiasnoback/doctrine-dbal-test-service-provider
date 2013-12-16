@@ -4,8 +4,14 @@ php:
   - 5.3
   - 5.4
 
+env:
+  - DOCTRINE_VERSION: 2.1.*
+  - DOCTRINE_VERSION: 2.2.*
+  - DOCTRINE_VERSION: 2.3.*
+  - DOCTRINE_VERSION: 2.4.*@dev
+
 before_script:
-  - composer install
+  - composer require --dev doctrine/dbal:${DOCTRINE_VERSION}
 
 notifications:
   email: matthiasnoback@gmail.com
