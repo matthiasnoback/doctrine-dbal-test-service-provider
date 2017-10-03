@@ -1,12 +1,15 @@
 <?php
 
-namespace Noback\PHPUnitTestServiceContainer\Tests\PHPUnit;
+namespace Noback\PHPUnitTestServiceContainer\PHPUnit;
 
 use Doctrine\DBAL\Schema\Schema;
-use Noback\PHPUnitTestServiceContainer\PHPUnit\AbstractTestCaseWithDoctrineDbalConnection;
+use PHPUnit\Framework\TestCase;
 
-class AbstractTestCaseWithDoctrineDbalConnectionTest extends AbstractTestCaseWithDoctrineDbalConnection
+final class TestCaseWithDoctrineDbalConnectionTest extends TestCase
 {
+    use TestCaseWithServiceContainer;
+    use TestCaseWithDoctrineDbalConnection;
+
     protected function createSchema()
     {
         $schema = new Schema();
@@ -37,7 +40,7 @@ class AbstractTestCaseWithDoctrineDbalConnectionTest extends AbstractTestCaseWit
      */
     public function in_between_tests_the_database_will_be_recreated()
     {
-        $result = $this->getConnection()->fetchAssoc('SELECT COUNT(*) as row_count FROM some_table');
+        $result = $this->getConnection()->fetchAssoc('SELECT COUNT(*) AS row_count FROM some_table');
         $this->assertEquals(0, $result['row_count']);
     }
 }

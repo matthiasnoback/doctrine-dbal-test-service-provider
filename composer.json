@@ -1,27 +1,35 @@
 {
-    "name": "matthiasnoback/doctrine-dbal-test-service-provider",
-    "type": "library",
-    "description": "Service provider for tests in need of a Doctrine DBAL connection",
-    "keywords": ["PHPUnit", "Doctrine DBAL", "service provider"],
-    "homepage": "http://github.com/matthiasnoback/doctrine-dbal-test-service-provider",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Matthias Noback",
-            "email": "matthiasnoback@gmail.com",
-            "homepage": "http://php-and-symfony.matthiasnoback.nl"
-        }
-    ],
-    "require": {
-        "matthiasnoback/phpunit-test-service-container": "~2.0",
-        "doctrine/dbal": "2.*"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "~4.0",
-        "pimple/pimple": "1.*"
-    },
-    "target-dir": "Noback/PHPUnitTestServiceContainer",
-    "autoload": {
-        "psr-0" : { "Noback\\PHPUnitTestServiceContainer" : "" }
+  "name": "matthiasnoback/doctrine-dbal-test-service-provider",
+  "type": "library",
+  "description": "Service provider for tests in need of a Doctrine DBAL connection",
+  "keywords": [
+    "PHPUnit",
+    "Doctrine DBAL",
+    "service provider"
+  ],
+  "homepage": "http://github.com/matthiasnoback/doctrine-dbal-test-service-provider",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Matthias Noback",
+      "email": "matthiasnoback@gmail.com",
+      "homepage": "https://matthiasnoback.nl"
     }
+  ],
+  "require": {
+    "php": "^7.0",
+    "matthiasnoback/phpunit-test-service-container": "~2.0",
+    "phpunit/phpunit": "^6.0",
+    "doctrine/dbal": "~2.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "": "test/"
+    }
+  }
 }
