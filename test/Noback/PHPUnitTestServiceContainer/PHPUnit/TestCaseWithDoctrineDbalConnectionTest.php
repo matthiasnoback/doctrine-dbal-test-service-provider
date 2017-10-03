@@ -7,7 +7,6 @@ use PHPUnit\Framework\TestCase;
 
 final class TestCaseWithDoctrineDbalConnectionTest extends TestCase
 {
-    use TestCaseWithServiceContainer;
     use TestCaseWithDoctrineDbalConnection;
 
     protected function createSchema()
@@ -41,6 +40,7 @@ final class TestCaseWithDoctrineDbalConnectionTest extends TestCase
     public function in_between_tests_the_database_will_be_recreated()
     {
         $result = $this->getConnection()->fetchAssoc('SELECT COUNT(*) AS row_count FROM some_table');
+
         $this->assertEquals(0, $result['row_count']);
     }
 }
