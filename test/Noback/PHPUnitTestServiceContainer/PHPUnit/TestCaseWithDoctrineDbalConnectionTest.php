@@ -29,7 +29,7 @@ final class TestCaseWithDoctrineDbalConnectionTest extends TestCase
 
         $this->getConnection()->insert('some_table', array('some_column' => $value));
 
-        $row = $this->getConnection()->fetchAssoc('SELECT * FROM some_table');
+        $row = $this->getConnection()->executeQuery('SELECT * FROM some_table')->fetchAssociative();
 
         $this->assertSame($value, $row['some_column']);
     }
@@ -39,7 +39,7 @@ final class TestCaseWithDoctrineDbalConnectionTest extends TestCase
      */
     public function in_between_tests_the_database_will_be_recreated()
     {
-        $result = $this->getConnection()->fetchAssoc('SELECT COUNT(*) AS row_count FROM some_table');
+        $result = $this->getConnection()->executeQuery('SELECT COUNT(*) AS row_count FROM some_table')->fetchAssociative();
 
         $this->assertEquals(0, $result['row_count']);
     }
