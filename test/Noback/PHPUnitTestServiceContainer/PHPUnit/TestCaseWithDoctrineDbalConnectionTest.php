@@ -9,7 +9,7 @@ final class TestCaseWithDoctrineDbalConnectionTest extends TestCase
 {
     use TestCaseWithDoctrineDbalConnection;
 
-    protected function createSchema()
+    protected function createSchema(): Schema
     {
         $schema = new Schema();
 
