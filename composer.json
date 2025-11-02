@@ -7,7 +7,7 @@
     "Doctrine DBAL",
     "service provider"
   ],
-  "homepage": "http://github.com/matthiasnoback/doctrine-dbal-test-service-provider",
+  "homepage": "https://github.com/matthiasnoback/doctrine-dbal-test-service-provider",
   "license": "MIT",
   "authors": [
     {
