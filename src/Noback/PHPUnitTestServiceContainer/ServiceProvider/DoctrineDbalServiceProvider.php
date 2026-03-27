@@ -10,6 +10,8 @@ use Noback\PHPUnitTestServiceContainer\ServiceContainer;
 use Noback\PHPUnitTestServiceContainer\ServiceProvider;
 use Pimple\Container;
 
+use function class_exists;
+
 final class DoctrineDbalServiceProvider implements ServiceProvider
 {
     private $schema;
@@ -26,16 +28,22 @@ final class DoctrineDbalServiceProvider implements ServiceProvider
             'memory' => true,
         );
 
-        $serviceContainer['doctrine_dbal.event_manager'] = function () {
-            return new EventManager();
-        };
+        if (class_exists(EventManager::class)) {
+            $serviceContainer['doctrine_dbal.event_manager'] = function () {
+                return new EventManager();
+            };
+        }
 
         $serviceContainer['doctrine_dbal.connection'] = function (ServiceContainer $serviceContainer) {
-            return DriverManager::getConnection(
-                $serviceContainer['doctrine_dbal.connection_configuration'],
-                null,
-                $serviceContainer['doctrine_dbal.event_manager']
-            );
+            if (class_exists(EventManager::class)) {
+                return DriverManager::getConnection(
+                    $serviceContainer['doctrine_dbal.connection_configuration'],
+                    null,
+                    $serviceContainer['doctrine_dbal.event_manager']
+                );
+            }
+
+            return DriverManager::getConnection($serviceContainer['doctrine_dbal.connection_configuration']);
         };
 
         $serviceContainer['doctrine_dbal.schema'] = $this->schema;
@@ -54,7 +62,7 @@ final class DoctrineDbalServiceProvider implements ServiceProvider
     private function createSchema(Connection $connection, Schema $schema)
     {
         foreach ($schema->toSql($connection->getDatabasePlatform()) as $sql) {
-            $connection->exec($sql);
+            $connection->executeStatement($sql);
         }
     }
 
